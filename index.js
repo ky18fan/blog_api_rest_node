@@ -27,7 +27,7 @@ app.use("/api", articleRoutes);
 
 app.get("/", (req, res) => {
     return res.status(200).send(
-        "<h1>Starting to create an API Rest with NodeJS"
+        "<h1>Starting to create an API Rest with NodeJS</h1>"
     );
 });
 
