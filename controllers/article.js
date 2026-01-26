@@ -33,7 +33,7 @@ const create = (req, res) => {
             msg: "Article wasn't saved."
         });
     });
-};
+}
 
 const getArticles = (req, res) => {
     let query = Article.find({});
@@ -51,7 +51,7 @@ const getArticles = (req, res) => {
             msg: "Articles weren't found."
         });
     });
-};
+}
 
 const getOneArticle = (req, res) => {
     // Pick an id with URL
@@ -68,7 +68,7 @@ const getOneArticle = (req, res) => {
             msg: "Article not found."
         });
     });
-};
+}
 
 const deleteArticle = (req, res) => {
     let articleId = req.params.id;
@@ -84,7 +84,7 @@ const deleteArticle = (req, res) => {
             msg: "Error deleting article."
         });
     });
-};
+}
 
 const updateArticle = (req, res) => {
     // Pick id
@@ -114,7 +114,7 @@ const updateArticle = (req, res) => {
             msg: "Error while updating."
         })
     });
-};
+}
 
 const uploadImg = (req, res) => {
     // Retrieve the uploaded image file
@@ -144,7 +144,7 @@ const uploadImg = (req, res) => {
         // Pick id
         let articleId = req.params.id;
         // Search and update article
-        Article.findOneAndUpdate({ _id: articleId }, {image: req.file.filename}, { new: true }).then((updatedArticle) => {
+        Article.findOneAndUpdate({ _id: articleId }, { image: req.file.filename }, { new: true }).then((updatedArticle) => {
             // Return result
             return res.status(200).json({
                 status: "success",
@@ -159,16 +159,16 @@ const uploadImg = (req, res) => {
             })
         });
     }
-};
+}
 
 const showImage = (req, res) => {
     let imageFile = req.params.file;
     let imagePath = `./images/articles/${imageFile}`;
     console.log(imagePath);
     fs.stat(imagePath, (error, exists) => {
-        if(exists){
+        if (exists) {
             return res.sendFile(path.resolve(imagePath));
-        }else {
+        } else {
             return res.status(404).json({
                 status: "error",
                 msg: "Image doesn't exist.",
@@ -178,29 +178,31 @@ const showImage = (req, res) => {
             });
         };
     });
-};
+}
 
 const browser = (req, res) => {
     // Get search string
     let browse = req.params.browse;
     // Find OR
-    Article.find({ "$or": [
-        { "title": {"$regex": browse, "$options": "i"}},
-        { "content": {"$regex": browse, "$options": "i"}}
-    ]})
-    .sort({date: -1})
-    .exec().then((articlesFound) => {
-        return res.status(200).json({
-            status: "success",
-            articles: articlesFound
+    Article.find({
+        "$or": [
+            { "title": { "$regex": browse, "$options": "i" } },
+            { "content": { "$regex": browse, "$options": "i" } }
+        ]
+    })
+        .sort({ date: -1 })
+        .exec().then((articlesFound) => {
+            return res.status(200).json({
+                status: "success",
+                articles: articlesFound
+            });
+        }).catch(() => {
+            return res.status(404).json({
+                status: "error",
+                msg: "Articles not found."
+            });
         });
-    }).catch(() => {
-        return res.status(404).json({
-            status: "error",
-            msg: "Articles not found."
-        });
-    });
-};
+}
 
 module.exports = {
     create,
