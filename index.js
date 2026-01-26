@@ -17,7 +17,7 @@ app.use(cors());
 
 // Convert body to JS Object
 app.use(express.json()); // Receive data with content-type app/json
-app.use(express.urlencoded({extended:true})); // Receive data with form-urlencoded
+app.use(express.urlencoded({ extended: true })); // Receive data with form-urlencoded
 
 // Routes
 const articleRoutes = require("./routes/article");
@@ -32,6 +32,6 @@ app.get("/", (req, res) => {
 });
 
 // Create server and listen to http
-app.listen(port, () =>  {
+app.listen(port, () => {
     console.log(`Server is running on port ${port}.`);
 });
