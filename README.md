@@ -18,6 +18,7 @@ A RESTful API for a blog platform built with Node.js, Express, and MongoDB.
 - Multer (file uploads)
 - Validator (input validation)
 - Nodemon (development)
+- Docker
 
 ## Getting Started
 
