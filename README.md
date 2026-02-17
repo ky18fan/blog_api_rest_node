@@ -1,58 +1,116 @@
 # blog_api_rest_node
 
-A RESTful API for a blog platform built with Node.js, Express, and MongoDB.
+A RESTful API for a blog platform built with Node.js, Express, and
+MongoDB.\
+This project is fully containerized using Docker and Docker Compose for
+consistent development and deployment environments.
 
-## Features
+------------------------------------------------------------------------
 
-- Create, read, update, and delete articles
-- Image upload for articles
-- Input validation
-- MongoDB integration with Mongoose
-- CORS support
+## 🚀 Features
 
-## Technologies Used
+-   Create, read, update, and delete articles
+-   Image upload for articles
+-   Input validation
+-   MongoDB integration with Mongoose
+-   CORS support
+-   Containerized multi-service architecture
 
-- Node.js
-- Express
-- MongoDB & Mongoose
-- Multer (file uploads)
-- Validator (input validation)
-- Nodemon (development)
+------------------------------------------------------------------------
 
-## Getting Started
+## 🛠 Technologies Used
 
-1. Clone the repository:
-   ```
-   git clone <your-repo-url>
-   cd blog_api_rest_node
-   ```
+-   Node.js
+-   Express
+-   MongoDB & Mongoose
+-   Docker
+-   Docker Compose
+-   Multer (file uploads)
+-   Validator (input validation)
 
-2. Install dependencies:
-   ```
-   npm install
-   ```
+------------------------------------------------------------------------
 
-3. Set up your MongoDB connection in `database/connection.js`.
+## 🐳 Docker Setup (Recommended)
 
-4. Start the server:
-   ```
-   npm start
-   ```
+This project runs using a multi-container Docker setup:
 
-## Project Structure
+### Services
 
-- `index.js` – Entry point
-- `controllers/` – Route handlers
-- `models/` – Mongoose models
-- `routes/` – API routes
-- `database/` – Database connection
-- `utils/` – Utility functions
-- `images/articles/` – Uploaded article images
+-   **API Service** -- Node.js + Express application
+-   **MongoDB Service** -- Official MongoDB image
+-   Persistent Docker volume for database storage
 
-## Scripts
+------------------------------------------------------------------------
 
-- `npm start` – Start the server with nodemon
+### 📦 Run with Docker
 
-## License
+1.  Make sure Docker is installed.
+
+2.  Clone the repository:
+
+    git clone `<your-repo-url>`{=html} cd blog_api_rest_node
+
+3.  Run the application:
+
+    docker compose up --build
+
+4.  The API will be available at:
+
+    http://localhost:3000
+
+MongoDB runs internally inside the Docker network.
+
+------------------------------------------------------------------------
+
+## 🔐 Environment Variables
+
+Create a `.env` file in the root directory:
+
+PORT=3000 MONGO_URI=mongodb://mongodb:27017/blogdb
+
+> Note: `mongodb` is the service name defined in `docker-compose.yml`.
+
+------------------------------------------------------------------------
+
+## 🧱 Docker Architecture
+
+-   The API runs inside a custom Node.js container.
+-   MongoDB runs in a separate container.
+-   Services communicate through a Docker internal network.
+-   Database data is persisted using Docker volumes.
+-   Environment variables are injected at runtime.
+
+This structure ensures environment consistency, portability, and
+scalability.
+
+------------------------------------------------------------------------
+
+## 🚀 Deployment-Ready Structure
+
+The application follows container-based deployment best practices:
+
+-   Multi-container setup
+-   Isolated service networking
+-   Persistent storage
+-   Environment-based configuration
+-   Ready to migrate to Kubernetes or cloud container platforms
+
+------------------------------------------------------------------------
+
+## 📂 Project Structure
+
+-   `index.js` -- Entry point
+-   `controllers/` -- Route handlers
+-   `models/` -- Mongoose models
+-   `routes/` -- API routes
+-   `database/` -- Database connection
+-   `utils/` -- Utility functions
+-   `images/articles/` -- Uploaded article images
+-   `Dockerfile` -- API container definition
+-   `docker-compose.yml` -- Multi-container orchestration
+
+------------------------------------------------------------------------
+
+## 📜 License
 
 MIT
